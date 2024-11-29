@@ -45,7 +45,7 @@ input:focus, select:focus, textarea:focus {
 button {
     width: 70%; /* Asegura que el botón esté centrado */
     padding: 10px 20px;
-    background-color: #007BFF;
+    background-color: #fffb00;
     color: white;
     border: none;
     border-radius: 4px;
