@@ -1,0 +1,18 @@
+.buscar-container {
+    margin-top: 77px;
+    
+  }
+  
+  input {
+    width:40%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #dbdfde;
+    border-radius: 4px;
+    background-color: grey;
+    color:white
+  }
+
+  input::placeholder{
+    color: rgba(238, 238, 238, 0.37);
+  }

@@ -1,0 +1,65 @@
+
+
+
+
+
+<form class="form-container mat-dialog" [formGroup]="form" (ngSubmit)="agregar_editarEquipo()">
+  <h1 class="modal-title">{{accion}} Equipo</h1>
+  <div class="form-group">
+    <label for="nombre">Nombre del Equipo</label>
+    <input type="text" id="nombre" formControlName="nombre">
+    <div *ngIf="form.get('nombre')?.touched && form.get('nombre')?.invalid" class="error">
+      {{ getControlError('nombre') }}
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="pais">País</label>
+    <input type="text" id="pais" formControlName="pais">
+    <div *ngIf="form.get('pais')?.touched && form.get('pais')?.invalid" class="error">
+      {{ getControlError('pais') }}
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="ciudad">Ciudad</label>
+    <input type="text" id="ciudad" formControlName="ciudad">
+    <div *ngIf="form.get('ciudad')?.touched && form.get('ciudad')?.invalid" class="error">
+      {{ getControlError('ciudad') }}
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="estadio">Estadio</label>
+    <input type="text" id="estadio" formControlName="estadio">
+    <div *ngIf="form.get('estadio')?.touched && form.get('estadio')?.invalid" class="error">
+      {{ getControlError('estadio') }}
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="categoria">Categoría</label>
+    <select id="categoria" formControlName="categoria">
+      <option value="">Selecciona una categoría</option>
+      <option *ngFor="let cat of categorias" [value]="cat.id">{{cat.desc}}</option>
+    </select>
+    <div *ngIf="form.get('categoria')?.touched && form.get('categoria')?.invalid" class="error">
+      {{ getControlError('categoria') }}
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="dt">Director Técnico</label>
+    <input type="text" id="dt" formControlName="dt">
+    <div *ngIf="form.get('dt')?.touched && form.get('dt')?.invalid" class="error">
+      {{ getControlError('dt') }}
+    </div>
+  </div>
+
+  <button type="submit"  (click)="submitAccion = true">{{accion}} Equipo</button>
+  <div *ngIf="submitAccion==true && form.invalid" class="error">
+    <span class="error">Debe completar el formulario</span>
+  </div>
+</form>
+
+ 

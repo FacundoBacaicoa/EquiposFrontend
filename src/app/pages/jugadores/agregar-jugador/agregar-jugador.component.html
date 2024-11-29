@@ -1,0 +1,65 @@
+
+
+<form class="form-container" [formGroup]="form" (ngSubmit)="agregar_editarJugador()">
+    <h1 class="title">{{accion}} Jugador</h1>
+  <div class="form-group">
+    <label for="nombre">Nombre</label>
+    <input type="text" id="nombre" formControlName="nombre">
+    <div *ngIf="form.get('nombre')?.touched && form.get('nombre')?.invalid" class="error">
+      {{ getControlError('nombre') }}
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="nombre">Apellido</label>
+    <input type="text" id="apellido" formControlName="apellido">
+    <div *ngIf="form.get('apellido')?.touched && form.get('apellido')?.invalid" class="error">
+      {{ getControlError('apellido') }}
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="pais">Edad</label>
+    <input type="text" min="16" max="100"  id="edad" formControlName="edad">
+    <div *ngIf="form.get('edad')?.touched && form.get('edad')?.invalid" class="error">
+      {{ getControlError('edad') }}
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="pais">País</label>
+    <input type="text" id="pais" formControlName="pais">
+    <div *ngIf="form.get('pais')?.touched && form.get('pais')?.invalid" class="error">
+      {{ getControlError('pais') }}
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="ciudad">Ciudad</label>
+    <input type="text" id="ciudad" formControlName="ciudad">
+    <div *ngIf="form.get('ciudad')?.touched && form.get('ciudad')?.invalid" class="error">
+      {{ getControlError('ciudad') }}
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="estadio">Sueldo</label>
+    <input type="number" id="sueldo" formControlName="sueldo">
+    <div *ngIf="form.get('sueldo')?.touched && form.get('sueldo')?.invalid" class="error">
+      {{ getControlError('sueldo') }}
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="equipo">Equipo</label>
+    <select id="equipo" formControlName="equipo">
+        <option value="">¿A qué equipo pertenece?</option>
+        <option *ngFor="let equipo of equipos" [value]="equipo.id">{{ equipo.name }}</option>
+      </select>
+    <div *ngIf="form.get('equipo')?.touched && form.get('equipo')?.invalid" class="error">
+      {{ getControlError('equipo') }}
+    </div>
+  </div>
+  <button type="submit"  (click)="submitAccion = true">{{accion}} Jugador</button>
+  <div *ngIf="submitAccion==true && form.invalid" class="error">
+    <span class="error">Debe completar el formulario</span>
+  </div>
+</form>

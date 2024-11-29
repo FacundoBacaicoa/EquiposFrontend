@@ -1,0 +1,58 @@
+.form-container {
+  
+  margin: 5px;
+  
+ 
+ 
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centrar elementos */
+  gap: 15px;  
+  
+}
+
+
+.form-group {
+  display: flex;
+  flex-direction: column; 
+  width: 100%;
+}
+h1{color: white;}
+label {
+  font-size: 14px;
+  color: #f0f0f0; /* Contraste alto para etiquetas */
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #555; /* Color de borde más oscuro */
+  border-radius: 4px;
+  background-color: #444; /* Fondo del campo similar al formulario */
+  color: #f0f0f0; /* Texto claro */
+  transition: border 0.3s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: #00bfff; /* Azul brillante para enfoque */
+  outline: none;
+}
+
+button {
+  width: 70%; /* Asegura que el botón esté centrado */
+  padding: 10px 20px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  align-self: center; /* Centrar botón */
+}
+
+button:hover {
+  background-color: #0056b3;
+
+}

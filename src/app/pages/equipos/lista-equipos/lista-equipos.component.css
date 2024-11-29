@@ -1,0 +1,19 @@
+a{
+    cursor:pointer;
+}
+
+th{
+    color: rgb(226, 156, 190);
+}
+.seleccionador-container{
+    text-align: center;
+    margin-top: 70px;
+    
+  }
+.seleccionador-container button{
+    margin: 10px auto;
+    background-color: rgb(114, 14, 81);
+    margin-left:10px ;
+  }
+
+  

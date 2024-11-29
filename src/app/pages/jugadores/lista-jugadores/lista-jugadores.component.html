@@ -1,0 +1,83 @@
+<div class="row" >
+    <div class="col-10 buscador-container">
+      <app-buscador 
+      [title]="'Buscar Jugador'"
+      [titlePlaceholder]="'jugador'"
+      [data]="jugadores"
+      [propiedad]="'firstName'"
+      (filtrarData)="jugadoresFiltrados = $event">
+      
+
+      </app-buscador>
+    </div>
+    <div class="col-2 d-flex justify-content-end">
+      <button mat-button class="editar-button"  (click)="agregarDialog()"><mat-icon>add</mat-icon>
+        Agregar Jugador</button>
+    </div>
+    
+  </div>
+
+  <table mat-table [dataSource]=" jugadoresFiltrados || jugadores" >
+  
+    <!-- Nombre Column -->
+    <ng-container matColumnDef="nombre">
+      <th mat-header-cell *matHeaderCellDef> Nombre </th>
+      <td mat-cell *matCellDef="let element"> {{element.firstName | titlecase}}  </td>
+    </ng-container>
+  
+    <!-- Pais Column -->
+    <ng-container matColumnDef="apellido">
+      <th mat-header-cell *matHeaderCellDef> Apellido </th>
+      <td mat-cell *matCellDef="let element"> {{element.lastName | titlecase}} </td>
+    </ng-container>
+  
+    <!-- Ciudad Column -->
+    <ng-container matColumnDef="edad">
+      <th mat-header-cell *matHeaderCellDef> Edad </th>
+      <td mat-cell *matCellDef="let element"> {{element.age | number}} </td>
+    </ng-container>
+  
+    <!-- Estadio Column -->
+    <ng-container matColumnDef="pais">
+      <th mat-header-cell *matHeaderCellDef> Pais </th>
+      <td mat-cell *matCellDef="let element"> {{element.country | titlecase}}  </td>
+    </ng-container>
+  
+    <!-- Categoria Column -->
+    <ng-container matColumnDef="ciudad">
+      <th mat-header-cell *matHeaderCellDef> Ciudad </th>
+      <td mat-cell *matCellDef="let element"> {{element.city | titlecase}}  </td>
+    </ng-container>
+  
+    <!-- DT Column -->
+    <ng-container matColumnDef="sueldo">
+      <th mat-header-cell *matHeaderCellDef> Sueldo </th>
+      <td mat-cell *matCellDef="let element"> {{element.salary| currency}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="equipo">
+        <th mat-header-cell *matHeaderCellDef> Equipo </th>
+        <td mat-cell *matCellDef="let element"> {{element.nombreEquipo | titlecase}} </td>
+      </ng-container>
+    
+    
+    <ng-container matColumnDef="editar">
+      <th mat-header-cell *matHeaderCellDef> Editar </th>
+      <td mat-cell *matCellDef="let element">
+        <a (click)="editarJugador(element)"><mat-icon>edit_square</mat-icon></a>
+      </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="borrar">
+      <th mat-header-cell *matHeaderCellDef> Borrar </th>
+      <td mat-cell *matCellDef="let element">
+        <a (click)="eliminarJugador(element.id)"><mat-icon>delete</mat-icon></a>
+        
+      </td>
+    </ng-container>
+    <!-- Header and Row Definitions -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+   
+  </table>

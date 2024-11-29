@@ -1,0 +1,86 @@
+<div class="row"> 
+  <div class="col-10 ">  
+    <app-buscador 
+     [title]="'Buscar Equipos'"
+     [titlePlaceholder]="'equipo'"
+    [data]="equipos"
+    [propiedad]="'name'"
+    (filtrarData)="equiposFiltrados = $event"
+    ></app-buscador>
+  </div> 
+<div class="col-2 d-flex justify-content-end">
+
+  <div class="seleccionador-container" >
+    
+    <button mat-button class="button" (click)="openDialog()"  ><mat-icon>add</mat-icon>
+      Agregar Equipo</button>
+  </div>
+</div>
+
+  
+</div>
+
+
+
+
+<table mat-table [dataSource]="equiposFiltrados || equipos" >
+  
+  <!-- Nombre Column -->
+  <ng-container matColumnDef="nombre">
+    <th mat-header-cell *matHeaderCellDef> Nombre </th>
+    <td mat-cell *matCellDef="let element"> {{element.name| titlecase}}  </td>
+  </ng-container>
+
+  <!-- Pais Column -->
+  <ng-container matColumnDef="pais">
+    <th mat-header-cell *matHeaderCellDef> País </th>
+    <td mat-cell *matCellDef="let element"> {{element.country | titlecase}} </td>
+  </ng-container>
+
+  <!-- Ciudad Column -->
+  <ng-container matColumnDef="ciudad">
+    <th mat-header-cell *matHeaderCellDef> Ciudad </th>
+    <td mat-cell *matCellDef="let element"> {{element.city | titlecase}} </td>
+  </ng-container>
+
+  <!-- Estadio Column -->
+  <ng-container matColumnDef="estadio">
+    <th mat-header-cell *matHeaderCellDef> Estadio </th>
+    <td mat-cell *matCellDef="let element"> {{element.stadium | titlecase}}  </td>
+  </ng-container>
+
+  <!-- Categoria Column -->
+  <ng-container matColumnDef="categoria">
+    <th mat-header-cell *matHeaderCellDef> Categoría </th>
+    <td mat-cell *matCellDef="let element"> {{element.category | titlecase}}  </td>
+  </ng-container>
+
+  <!-- DT Column -->
+  <ng-container matColumnDef="dt">
+    <th mat-header-cell *matHeaderCellDef> Director Técnico </th>
+    <td mat-cell *matCellDef="let element"> {{element.coach| titlecase}} </td>
+  </ng-container>
+
+  
+  <ng-container matColumnDef="editar">
+    <th mat-header-cell *matHeaderCellDef> Editar </th>
+    <td mat-cell *matCellDef="let element">
+      <a (click)="editarEquipo(element)"><mat-icon>edit_square</mat-icon></a>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="borrar">
+    <th mat-header-cell *matHeaderCellDef> Borrar </th>
+    <td mat-cell *matCellDef="let element">
+      <a (click)="eliminarEquipo(element.id)"><mat-icon>delete</mat-icon></a>
+      
+    </td>
+  </ng-container>
+  <!-- Header and Row Definitions -->
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+ 
+</table>
+
+
