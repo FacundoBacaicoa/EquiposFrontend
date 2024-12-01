@@ -63,6 +63,20 @@ this.creacionFormulario();
     });
 }
 
+asignarDatosJugador(jugador: Jugador): void {
+  this.form.patchValue({
+    nombre: jugador.firstName,
+    apellido: jugador.lastName,
+    edad: jugador.age,
+    pais: jugador.country,
+    ciudad: jugador.city,
+    sueldo: jugador.salary,
+    equipo: jugador.teamId  // Directly use teamId without Number()
+
+  });
+}
+
+
 creacionFormulario(): void{
   this.form = this.fb.group({
     nombre: ['', [Validators.required,Validators.minLength(2),Validators.maxLength(40)]],
