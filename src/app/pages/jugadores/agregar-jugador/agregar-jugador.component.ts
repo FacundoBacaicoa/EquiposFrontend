@@ -48,20 +48,32 @@ this.creacionFormulario();
     }
 
   }
-  cargarJugador(id:number): void{
+  cargarJugador(id: number): void {
     this.equipoFutService.getJugadorById(id).subscribe((jugador) => {
       console.log('Jugador cargado:', jugador);
-      this.form.patchValue({
-        nombre: jugador.firstName,
-        apellido: jugador.lastName,
-        edad: jugador.age,
-        pais: jugador.country,
-        ciudad: jugador.city,
-        sueldo: jugador.salary,
-        equipo: jugador.teamId // Asigna directamente el ID del equipo
+      
+      // Load teams first, then assign player data
+      this.equipoFutService.getListEquipos().subscribe((equipos) => {
+        this.asignarDatosJugador(jugador);
+        console.log(this.form.value);
+        this.equipos = equipos;
+        console.log(this.equipos);
+        
       });
     });
-}
+  }
+  
+  asignarDatosJugador(jugador: Jugador): void {
+    this.form.patchValue({
+      nombre: jugador.firstName,
+      apellido: jugador.lastName,
+      edad: jugador.age,
+      pais: jugador.country,
+      ciudad: jugador.city,
+      sueldo: jugador.salary,
+      equipo: jugador.teamId  // Directly use teamId without Number()
+    });
+  }
 
 creacionFormulario(): void{
   this.form = this.fb.group({
@@ -124,7 +136,7 @@ getControlError(controlName: string){
 
       }
       if (this.id === undefined){
-        
+        jugador.id=0
         console.log(jugador);
         this.equipoFutService.saveJugador(jugador)
         .subscribe(resp=>{
