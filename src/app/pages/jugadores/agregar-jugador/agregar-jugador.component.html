@@ -52,7 +52,7 @@
     <label for="equipo">Equipo</label>
     <select id="equipo" formControlName="equipo">
         <option value="">¿A qué equipo pertenece?</option>
-        <option *ngFor="let equipo of equipos" [ngValue]="equipo.id" >{{ equipo.name }}</option>
+        <option *ngFor="let equipo of equipos" [value]="equipo.id">{{ equipo.name }}</option>
       </select>
     <div *ngIf="form.get('equipo')?.touched && form.get('equipo')?.invalid" class="error">
       {{ getControlError('equipo') }}
