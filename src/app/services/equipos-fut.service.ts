@@ -9,7 +9,7 @@ import { Jugador } from '../interfaces/jugador-interfaz';
 })
 export class EquiposFutService {
 
-   private myAppUrl: string= 'https://localhost:44349/'
+   private myAppUrl: string= 'https://localhost:44369/'
    private myApiUrl: string= 'api/Teams/'
    private myApiUrljug: string='api/Players/'
 
