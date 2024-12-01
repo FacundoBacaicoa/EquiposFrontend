@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
 
   
   ngOnInit(): void {
+    //...
     this.setTitleBasedOnRoute();
     // Detectar cambios en la ruta incluso si no se recarga la página
     this.router.events.subscribe(() => {
