@@ -77,15 +77,15 @@ asignarDatosJugador(jugador: Jugador): void {
 }
 
 
-creacionFormulario(): void{
+creacionFormulario(): void {
   this.form = this.fb.group({
-    nombre: ['', [Validators.required,Validators.minLength(2),Validators.maxLength(40)]],
-    apellido: ['', [Validators.required,Validators.minLength(2),Validators.maxLength(40)]],
+    nombre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
+    apellido: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
     edad: ['', [Validators.required, Validators.min(16), Validators.max(50)]],
-    pais: ['', [Validators.required,Validators.minLength(2),Validators.maxLength(30)]],
-    ciudad: ['', [Validators.required,Validators.minLength(2),Validators.maxLength(30)]],
+    pais: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
+    ciudad: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
     sueldo: ['', [Validators.min(0)]],
-    equipo: ['', [Validators.required]] // Select para equipos
+    equipo: ['', [Validators.required]]
   });
 }
 
@@ -118,6 +118,17 @@ getControlError(controlName: string){
     }
     if (control?.hasError('maxlength')) {
       return 'Debe tener menos de 50 caracteres';
+    }
+  
+    if(control?.hasError('min')){
+      if(controlName==='edad'){
+        return 'Debe ingresar una edad entre 16 y 50';
+      }else if(controlName=== 'sueldo'){
+        return 'El sueldo debe ser mayor o igual a 0';
+      }
+    }
+    if(control?.hasError('max')){
+      return 'Debe ingresar una edad entre 16 y 50';
     }
     return null;
   }

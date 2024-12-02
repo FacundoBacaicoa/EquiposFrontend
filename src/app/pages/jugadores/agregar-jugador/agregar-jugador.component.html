@@ -19,7 +19,7 @@
 
   <div class="form-group">
     <label for="pais">Edad</label>
-    <input type="text" min="16" max="100"  id="edad" formControlName="edad">
+    <input type="number" min="16" max="50"  id="edad" formControlName="edad">
     <div *ngIf="form.get('edad')?.touched && form.get('edad')?.invalid" class="error">
       {{ getControlError('edad') }}
     </div>
