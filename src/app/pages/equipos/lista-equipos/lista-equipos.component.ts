@@ -5,6 +5,7 @@ import { Route, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
 import { AgregarEquipoComponent } from '../agregar-equipo/agregar-equipo.component';
+import { PageEvent } from '@angular/material/paginator';
 
 
 @Component({
@@ -16,7 +17,11 @@ export class ListaEquiposComponent {
 
 
 
-  equipos: Equipo[]=[]
+  equipos: Equipo[]=[];
+
+  currentPage: number = 0; // Current page
+  pageSize: number = 5; // Items per page
+  paginatedEquipos: Equipo[] = []; // Datos paginados para mostrar
 
   equiposFiltrados: Equipo[] | null = null;
   
@@ -33,14 +38,31 @@ export class ListaEquiposComponent {
    }
   
     obtenerEquipos(){
-      this.equiposFutService.getListEquipos()
-      .subscribe(resp=>{
+      this.equiposFutService.getListEquipos().subscribe(
+      resp => {
         console.log('Datos recibidos:', resp);
-        this.equipos=resp;
-      },error=>{
+        this.equipos = resp;
+        this.updatePaginatedData();
+      },
+      error => {
         console.log(error);
-      })
+      }
+    );
     }
+
+    //Paginator
+    updatePaginatedData(): void {
+      const start = this.currentPage * this.pageSize;
+      const end = start + this.pageSize;
+      this.paginatedEquipos = this.equipos.slice(start, end);
+    }
+    onPageChange(event: PageEvent): void {
+      this.currentPage = event.pageIndex;
+      this.pageSize = event.pageSize;
+      this.updatePaginatedData();
+    }
+
+
     
     eliminarEquipo(id: number){
       console.log('ID a eliminar:', id);

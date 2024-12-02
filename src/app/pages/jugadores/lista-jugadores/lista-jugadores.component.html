@@ -17,7 +17,7 @@
     
   </div>
 
-  <table mat-table [dataSource]=" jugadoresFiltrados || jugadores" >
+  <table mat-table [dataSource]=" jugadoresFiltrados || paginatedJugadores" >
   
     <!-- Nombre Column -->
     <ng-container matColumnDef="nombre">
@@ -81,3 +81,12 @@
   
    
   </table>
+
+  <mat-paginator
+    [length]="jugadores.length"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons
+    aria-label="Select page"
+    (page)="onPageChange($event)">
+</mat-paginator>

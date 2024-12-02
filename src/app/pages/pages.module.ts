@@ -16,6 +16,7 @@ import { MaterialModule } from '../material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { BuscadorComponent } from '../componentes/buscador/buscador.component';
+import { PaginationComponent } from '../componentes/pagination/pagination.component';
 
 
 
@@ -26,7 +27,8 @@ import { BuscadorComponent } from '../componentes/buscador/buscador.component';
     AgregarEquipoComponent,
     ListaJugadoresComponent,
     AgregarJugadorComponent,
-    BuscadorComponent],
+    BuscadorComponent,
+    PaginationComponent],
   imports: [
     CommonModule,
     PagesRoutingModule,
@@ -44,6 +46,7 @@ import { BuscadorComponent } from '../componentes/buscador/buscador.component';
     AgregarEquipoComponent,
     ListaJugadoresComponent,
     AgregarJugadorComponent,
-    BuscadorComponent]]
+    BuscadorComponent, 
+    PaginationComponent]]
 })
 export class PagesModule { }
