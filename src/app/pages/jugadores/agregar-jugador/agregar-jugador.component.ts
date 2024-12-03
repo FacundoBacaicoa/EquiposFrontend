@@ -91,7 +91,7 @@ creacionFormulario(): void {
 
 
 cargarEquipos() {
-  this.equipoFutService.getListEquipos()
+  this.equipoFutService.getListEquipos('')
   .subscribe(resp=>{
     this.equipos = resp; 
   },error=>{

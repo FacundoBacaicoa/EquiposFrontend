@@ -20,6 +20,8 @@ currentPage: number=0;
 pageSize: number=5;
 paginatedJugadores: Jugador[]=[]
 
+keyword: string=""
+
 jugadoresFiltrados: Jugador[] | null=null;
 
 displayedColumns: string[] = ['nombre', 'apellido', 'edad', 'pais', 'ciudad', 'sueldo','equipo','editar','borrar'];
@@ -33,7 +35,7 @@ constructor(private equiposFutService: EquiposFutService,
   }
 
 obtenerJugadores(){
-  this.equiposFutService.getListJugadores()
+  this.equiposFutService.getListJugadores(this.keyword)
   .subscribe(resp=>{
     this.jugadores=resp;
     this.updatePaginatedData();
@@ -53,6 +55,12 @@ onPageChange(event: PageEvent): void {
   this.pageSize = event.pageSize;
   this.updatePaginatedData();
 }
+
+search(keyword: string){
+  this.keyword=keyword
+  this.obtenerJugadores();
+}
+
 
 agregarDialog() {
   const dialogRef = this.dialog.open(AgregarJugadorComponent, {
