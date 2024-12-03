@@ -76,7 +76,7 @@ export class ListaEquiposComponent {
     }
 
    openDialog(){
-    let dialogRef= this.dialog.open(AgregarEquipoComponent,{width:'600px',height:'600px',data:null});
+    let dialogRef= this.dialog.open(AgregarEquipoComponent,{width:'600px',height:'650px',data:null});
     dialogRef.afterClosed()
     .subscribe(()=>{
       window.location.reload();
@@ -91,7 +91,7 @@ export class ListaEquiposComponent {
     let dialogRef=
     this.dialog.open(AgregarEquipoComponent,{
       width:'600px',
-      height:'600px',
+      height:'650px',
       data:{equipo}
     });
     dialogRef.afterClosed()

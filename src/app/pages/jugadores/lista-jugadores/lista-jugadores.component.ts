@@ -57,7 +57,7 @@ onPageChange(event: PageEvent): void {
 agregarDialog() {
   const dialogRef = this.dialog.open(AgregarJugadorComponent, {
     width: '600px', 
-    height: '700px', 
+    height: '740px', 
     data: null 
   });
 
@@ -69,7 +69,7 @@ agregarDialog() {
 editarJugador(jugador: Jugador) {
   const dialogRef = this.dialog.open(AgregarJugadorComponent, {
     width: '600px', 
-    height: '700px', 
+    height: '740px', 
     data: { jugador }
   });
 
