@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Equipo } from '../../../interfaces/equipo-interfaz';
 import { EquiposFutService } from '../../../services/equipos-fut.service';
-import { ToastrModule } from 'ngx-toastr';
+import {  ToastrService } from 'ngx-toastr';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
@@ -34,7 +34,7 @@ export class AgregarEquipoComponent implements OnInit{
     private router: Router,
     private equiposFutService: EquiposFutService,
     private route: ActivatedRoute ,// Para acceder a los parámetros de la URL
-    private toastr: ToastrModule,
+    private toastr: ToastrService,
     private dialogRef: MatDialogRef<AgregarEquipoComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { equipo: any | null }
 
@@ -132,6 +132,7 @@ export class AgregarEquipoComponent implements OnInit{
         
         this.dialogRef.close();
       },error=>{
+        this.toastr.error(error);
         console.log('Error al agregar el equipo', error)
       })
     }else{
@@ -141,8 +142,8 @@ export class AgregarEquipoComponent implements OnInit{
         console.log('Equipo Actualizado', resp)
         this.dialogRef.close();
       },error=>{
-        console.log()
-          console.log('Error al actualizar equipo',error)
+          this.toastr.error(error);
+          console.log('Error al actualizar equipo',error);
       });
       
     }
