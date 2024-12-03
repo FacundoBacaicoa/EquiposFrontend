@@ -5,7 +5,8 @@
       [titlePlaceholder]="'jugador'"
       [data]="jugadores"
       [propiedades]="['firstName','lastName']"
-      (filtrarData)="jugadoresFiltrados = $event">
+      (newData)="search($event)"
+      >
       
 
       </app-buscador>

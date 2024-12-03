@@ -16,9 +16,9 @@ export class EquiposFutService {
   constructor(private http: HttpClient) { }
 
 //Equipos
-  getListEquipos(): Observable<any>{
-    return this.http.get(this.myAppUrl + this.myApiUrl);
-  }
+getListEquipos(keyword: string): Observable<any> {
+  return this.http.get(`${this.myAppUrl}api/Teams?keyword=${keyword}`);
+}
 
  deleteEquipo(id_e: number): Observable<any>{
   return this.http.delete(this.myAppUrl + this.myApiUrl + id_e);
@@ -38,8 +38,8 @@ export class EquiposFutService {
 
 //Jugadores
 
-getListJugadores():Observable<any>{
-return this.http.get(this.myAppUrl+ this.myApiUrljug);
+getListJugadores(keyword: string):Observable<any>{
+  return this.http.get(`${this.myAppUrl}api/Players?keyword=${keyword}`);
 }
 
 saveJugador(jugador: Jugador): Observable<any>{

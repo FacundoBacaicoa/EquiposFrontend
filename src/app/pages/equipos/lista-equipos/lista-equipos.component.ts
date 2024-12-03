@@ -23,6 +23,8 @@ export class ListaEquiposComponent {
   pageSize: number = 5; // Items per page
   paginatedEquipos: Equipo[] = []; // Datos paginados para mostrar
 
+  keyword: string="";
+
   equiposFiltrados: Equipo[] | null = null;
   
   selectedButton:string ='';
@@ -38,7 +40,7 @@ export class ListaEquiposComponent {
    }
   
     obtenerEquipos(){
-      this.equiposFutService.getListEquipos().subscribe(
+      this.equiposFutService.getListEquipos(this.keyword).subscribe(
       resp => {
         console.log('Datos recibidos:', resp);
         this.equipos = resp;
@@ -62,7 +64,10 @@ export class ListaEquiposComponent {
       this.updatePaginatedData();
     }
 
-
+    search(keyword: string){
+      this.keyword=keyword
+      this.obtenerEquipos();
+    }
     
     eliminarEquipo(id: number){
       console.log('ID a eliminar:', id);
