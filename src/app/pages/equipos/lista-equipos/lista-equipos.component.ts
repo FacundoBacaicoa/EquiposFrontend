@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
 import { AgregarEquipoComponent } from '../agregar-equipo/agregar-equipo.component';
 import { PageEvent } from '@angular/material/paginator';
+import { ConfirmDialogComponent } from '../../../componentes/confirm-dialog/confirm-dialog.component';
 
 
 @Component({
@@ -69,15 +70,27 @@ export class ListaEquiposComponent {
       this.obtenerEquipos();
     }
     
-    eliminarEquipo(id: number){
-      console.log('ID a eliminar:', id);
-      this.equiposFutService.deleteEquipo(id)
-      .subscribe(resp=>{
-        this.toastr.error('Equipo eliminado con éxito', 'Equipo eliminado!');
-        this.obtenerEquipos();
-      },error=>{
-        console.log(error);
+    eliminarEquipo(id: number, nombre: string){
+    const dialogRef=this.dialog.open(ConfirmDialogComponent,{
+      width:'350px',
+      data:{
+        title:'Equipo',
+        name:nombre
+      }
+    });
+
+      dialogRef.afterClosed().subscribe(result=>{
+        if (result) {
+          this.equiposFutService.deleteEquipo(id)
+          .subscribe(resp=>{
+            this.toastr.error('Equipo eliminado con éxito', 'Equipo eliminado!');
+            this.obtenerEquipos();
+          },error=>{
+            console.log(error);
+          })
+        }
       })
+    
     }
 
    openDialog(){

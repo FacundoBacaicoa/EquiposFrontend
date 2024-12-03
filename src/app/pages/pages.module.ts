@@ -17,6 +17,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { BuscadorComponent } from '../componentes/buscador/buscador.component';
 import { PaginationComponent } from '../componentes/pagination/pagination.component';
+import { ConfirmDialogComponent } from '../componentes/confirm-dialog/confirm-dialog.component';
 
 
 
@@ -28,7 +29,8 @@ import { PaginationComponent } from '../componentes/pagination/pagination.compon
     ListaJugadoresComponent,
     AgregarJugadorComponent,
     BuscadorComponent,
-    PaginationComponent],
+    PaginationComponent,
+    ConfirmDialogComponent],
   imports: [
     CommonModule,
     PagesRoutingModule,
@@ -47,6 +49,7 @@ import { PaginationComponent } from '../componentes/pagination/pagination.compon
     ListaJugadoresComponent,
     AgregarJugadorComponent,
     BuscadorComponent, 
-    PaginationComponent]]
+    PaginationComponent,
+    ConfirmDialogComponent]]
 })
 export class PagesModule { }

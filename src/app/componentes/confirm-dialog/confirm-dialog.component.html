@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>Eliminar {{data.title}}</h1>
+<div mat-dialog-content>
+    <p>¿Está seguro que quiere borrar el {{data.title.toLowerCase()}} <strong>{{ data.name | titlecase}} {{data.lastname | titlecase}}</strong>?</p>
+    <div class="row">
+        <div class="col-3"><button mat-raised-button  (click)="onCancel()">No</button></div>
+        <div class="col-9 " > <button mat-raised-button color="warn" (click)="onConfirm()">Sí</button></div>
+        
+       
+    </div>
+ 
+</div>
