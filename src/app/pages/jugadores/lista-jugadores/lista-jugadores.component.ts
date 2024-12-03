@@ -6,6 +6,8 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { AgregarJugadorComponent } from '../agregar-jugador/agregar-jugador.component';
 import { PageEvent } from '@angular/material/paginator';
+import { ConfirmDialogComponent } from '../../../componentes/confirm-dialog/confirm-dialog.component';
+import { NonNullableFormBuilder } from '@angular/forms';
 @Component({
   selector: 'app-lista-jugadores',
   templateUrl: './lista-jugadores.component.html',
@@ -87,16 +89,29 @@ editarJugador(jugador: Jugador) {
     })
 }
 
-eliminarJugador(id: number){
-  console.log(id);
-this.equiposFutService.deleteJugador(id)
-.subscribe(resp=>{
-  console.log('Jugador eliminado con éxito',resp)
-  this.toastr.error('Jugador elminado con éxito','jugador Eliminado')
-  this.obtenerJugadores();
-},error=>{
-  console.log(error)
-})
+eliminarJugador(id: number, nombre: string, apellido: string){
+  const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+    width: '350px',
+    data:{
+      title: 'Jugador',
+      name: nombre,
+      lastname: apellido
+    }
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    if (result) {
+      this.equiposFutService.deleteJugador(id).subscribe(
+        () => {
+          this.toastr.error('Jugador eliminado con éxito', 'Jugador Eliminado');
+          this.obtenerJugadores();
+        },
+        error => {
+          console.error('Error al eliminar el jugador:', error);
+        }
+      );
+    }
+  });
 }
 
 
