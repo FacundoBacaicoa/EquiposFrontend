@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {  Equipo } from '../../../interfaces/equipo-interfaz';
+import {  Teams } from '../../../interfaces/equipo-interfaz';
 import { EquiposFutService } from '../../../services/equipos-fut.service';
 import { Route, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -18,15 +18,15 @@ export class ListaEquiposComponent {
 
 
 
-  equipos: Equipo[]=[];
+  equipos: Teams[]=[];
 
   currentPage: number = 0; // Current page
   pageSize: number = 5; // Items per page
-  paginatedEquipos: Equipo[] = []; // Datos paginados para mostrar
+  paginatedTeams: Teams[] = []; // Datos paginados para mostrar
 
   keyword: string="";
 
-  equiposFiltrados: Equipo[] | null = null;
+  filterTeams: Teams[] | null = null;
   
   selectedButton:string ='';
    
@@ -37,10 +37,10 @@ export class ListaEquiposComponent {
   ) {}
 
   ngOnInit() {
-    this.obtenerEquipos();
+    this.getTeams();
    }
   
-    obtenerEquipos(){
+    getTeams(){
       this.equiposFutService.getListEquipos(this.keyword).subscribe(
       resp => {
         console.log('Datos recibidos:', resp);
@@ -57,7 +57,7 @@ export class ListaEquiposComponent {
     updatePaginatedData(): void {
       const start = this.currentPage * this.pageSize;
       const end = start + this.pageSize;
-      this.paginatedEquipos = this.equipos.slice(start, end);
+      this.paginatedTeams = this.equipos.slice(start, end);
     }
     onPageChange(event: PageEvent): void {
       this.currentPage = event.pageIndex;
@@ -67,10 +67,10 @@ export class ListaEquiposComponent {
 
     search(keyword: string){
       this.keyword=keyword
-      this.obtenerEquipos();
+      this.getTeams();
     }
     
-    eliminarEquipo(id: number, nombre: string){
+    deleteTeams(id: number, nombre: string){
     const dialogRef=this.dialog.open(ConfirmDialogComponent,{
       width:'350px',
       data:{
@@ -84,7 +84,7 @@ export class ListaEquiposComponent {
           this.equiposFutService.deleteEquipo(id)
           .subscribe(resp=>{
             this.toastr.error('Equipo eliminado con éxito', 'Equipo eliminado!');
-            this.obtenerEquipos();
+            this.getTeams();
           },error=>{
             console.log(error);
           })
@@ -102,7 +102,7 @@ export class ListaEquiposComponent {
   }
 
 
-  editarEquipo(equipo: Equipo){
+  editTeams(equipo: Teams){
     // Navegar a agregar-component con el ID como parámetro
     console.log(equipo)
 

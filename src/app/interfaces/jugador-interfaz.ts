@@ -1,6 +1,6 @@
-import { Equipo } from "./equipo-interfaz";
 
-export interface Jugador {
+
+export interface Players {
     id?: number;           
     firstName: string;        
     lastName: string;        

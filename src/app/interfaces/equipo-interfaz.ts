@@ -1,4 +1,4 @@
-export interface Equipo {
+export interface Teams{
     id?: number;         // Identificador único del equipo
     name: string;     
     country: string;   

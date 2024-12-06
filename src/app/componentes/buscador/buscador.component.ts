@@ -10,7 +10,7 @@ export class BuscadorComponent {
 @Input() title: string='Buscar';// Título del input
 @Input() titlePlaceholder: string='';
 @Input() data: any[]=[]; // Lista de datos a buscar
-@Input() propiedades: string[]= []; // Propiedad del objeto para filtrar
+@Input() properties: string[]= []; // Propiedad del objeto para filtrar
 
 @Output() newData=new EventEmitter<string>(); // Emitir resultados filtrados
 

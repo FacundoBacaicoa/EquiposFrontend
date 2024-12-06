@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { ActivatedRoute, Router } from '@angular/router';
-import { Equipo } from '../../../interfaces/equipo-interfaz';
+import { Teams } from '../../../interfaces/equipo-interfaz';
 import { EquiposFutService } from '../../../services/equipos-fut.service';
 import {  ToastrService } from 'ngx-toastr';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
@@ -40,7 +40,7 @@ export class AgregarEquipoComponent implements OnInit{
 
     
   ) {
-   this.creacionFormulario();
+   this.creationForm();
   }
   ngOnInit(): void {
     // Obtener ID de la URL y cargar datos del equipo si existe
@@ -52,7 +52,7 @@ export class AgregarEquipoComponent implements OnInit{
         
         this.id=this.data.equipo.id;
         this.accion = 'Editar';
-        this.cargarEquipo(this.data.equipo.id); // Cargar el equipo para edición
+        this.loadTeam(this.data.equipo.id); // Cargar el equipo para edición
      }else{
       this.id=undefined;
      }
@@ -61,7 +61,7 @@ export class AgregarEquipoComponent implements OnInit{
   }
 
 
-  cargarEquipo(id:number): void{
+  loadTeam(id:number): void{
     this.equiposFutService.getEquipoById(id).subscribe(
       equipo => {
         this.form.patchValue({
@@ -79,7 +79,7 @@ export class AgregarEquipoComponent implements OnInit{
     );
   }
   
-  creacionFormulario(): void {
+  creationForm(): void {
     this.form = this.fb.group({
       id_e: [0],
       nombre: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
@@ -109,11 +109,11 @@ export class AgregarEquipoComponent implements OnInit{
 
 
   // Método para agregar o editar equipo
-  agregar_editarEquipo() {
+  addOrEditTeam() {
     this.submitAccion = true;
    if(this.form.valid){
     // Crear objeto equipo con los valores del formulario
-    const equipo: Equipo={
+    const equipo: Teams={
       id: this.id, // Incluye el ID solo si existe
       name:this.form.value.nombre,
       country:this.form.value.pais,

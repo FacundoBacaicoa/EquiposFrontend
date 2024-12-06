@@ -16,15 +16,15 @@ const routes: Routes = [
         path: 'equipos',
         children: [
           { path: 'lista', component: ListaEquiposComponent },
-          { path: 'agregar', component: AgregarEquipoComponent },
-          { path: 'editar/:id', component: AgregarEquipoComponent },
+          // { path: 'agregar', component: AgregarEquipoComponent },
+          // { path: 'editar/:id', component: AgregarEquipoComponent },
         ],
       },
       {
         path: 'jugadores',
         children: [
           { path: 'lista', component: ListaJugadoresComponent },
-          { path: 'agregar', component: AgregarJugadorComponent },
+          // { path: 'agregar', component: AgregarJugadorComponent },
         ],
       },
     ],

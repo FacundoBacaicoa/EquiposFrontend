@@ -2,10 +2,10 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { ActivatedRoute, Router } from '@angular/router';
-import { Equipo } from '../../../interfaces/equipo-interfaz';
+import { Teams } from '../../../interfaces/equipo-interfaz';
 import { EquiposFutService } from '../../../services/equipos-fut.service';
 import { ToastrModule } from 'ngx-toastr';
-import { Jugador } from '../../../interfaces/jugador-interfaz';
+import {  Players } from '../../../interfaces/jugador-interfaz';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 
@@ -23,16 +23,16 @@ export class AgregarJugadorComponent implements OnInit{
   form!: FormGroup;
   id: number | undefined;
 constructor(private fb: FormBuilder,
-   private equipoFutService: EquiposFutService,
+    private equipoFutService: EquiposFutService,
     private router: Router,
     private dialogRef: MatDialogRef<AgregarJugadorComponent>,
     @Inject(MAT_DIALOG_DATA) public data:{jugador: any| null}) {
   // Inicializar el formulario en el constructor o en ngOnInit
-this.creacionFormulario();
+this.creationForm();
 
 }
   ngOnInit(): void {
-    this.cargarEquipos();
+    this.loadTeams();
     
     console.log(this.data)
     console.log('DialogRef:', this.dialogRef);
@@ -41,14 +41,14 @@ this.creacionFormulario();
       this.id=this.data.jugador.id;
       this.accion='Editar';
      // Esperamos que los equipos estén cargados antes de cargar el jugador
-    setTimeout(() => this.cargarJugador(this.data.jugador.id), 0);
+    setTimeout(() => this.loadPlayer(this.data.jugador.id), 0);
 
     }else{
       this.id=undefined;
     }
 
   }
-  cargarJugador(id:number): void{
+  loadPlayer(id:number): void{
     this.equipoFutService.getJugadorById(id).subscribe((jugador) => {
       console.log('Jugador cargado:', jugador);
       this.form.patchValue({
@@ -63,7 +63,7 @@ this.creacionFormulario();
     });
 }
 
-asignarDatosJugador(jugador: Jugador): void {
+assignPlayerData(jugador: Players): void {
   this.form.patchValue({
     nombre: jugador.firstName,
     apellido: jugador.lastName,
@@ -77,7 +77,7 @@ asignarDatosJugador(jugador: Jugador): void {
 }
 
 
-creacionFormulario(): void {
+ creationForm(): void {
   this.form = this.fb.group({
     nombre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
     apellido: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
@@ -90,7 +90,7 @@ creacionFormulario(): void {
 }
 
 
-cargarEquipos() {
+loadTeams() {
   this.equipoFutService.getListEquipos('')
   .subscribe(resp=>{
     this.equipos = resp; 
@@ -134,10 +134,10 @@ getControlError(controlName: string){
   }
 
   // Método para agregar o editar equipo
-  agregar_editarJugador(){
+  addOrEditPlayer(){
     if(this.form.valid){
 // Crear objeto equipo con los valores del formulario
-      const jugador: Jugador={
+      const jugador: Players={
         id: this.id !== undefined ? this.id : 0,// Incluye el ID solo si existe
         firstName:this.form.value.nombre,
         lastName:this.form.value.apellido,
@@ -186,8 +186,8 @@ getControlError(controlName: string){
   }
 
 
-  getEquipoNombre(id: number): string {
-    const equipo = this.equipos.find(e => e.id === id);
-    return equipo ? equipo.name : '';
-  }
+  // getEquipoNombre(id: number): string {
+  //   const equipo = this.equipos.find(e => e.id === id);
+  //   return equipo ? equipo.name : '';
+  // }
 }

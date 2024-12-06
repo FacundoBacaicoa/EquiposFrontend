@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
-import { Equipo } from '../interfaces/equipo-interfaz';
-import { Jugador } from '../interfaces/jugador-interfaz';
+import { Teams } from '../interfaces/equipo-interfaz';
+import { Players } from '../interfaces/jugador-interfaz';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +24,7 @@ getListEquipos(keyword: string): Observable<any> {
   return this.http.delete(this.myAppUrl + this.myApiUrl + id_e);
  }
 
- saveEquipo(equipo: Equipo): Observable<any>{
+ saveEquipo(equipo: Teams): Observable<any>{
  return this.http.post(this.myAppUrl + this.myApiUrl, equipo).pipe(
   catchError((error)=>{
     if(error.status=== 404 && error.error.message === 'el equipo ya existe'){
@@ -35,7 +35,7 @@ getListEquipos(keyword: string): Observable<any> {
  );
  }
 
- updateEquipo(id_e:number,equipo:Equipo): Observable<any>{
+ updateEquipo(id_e:number,equipo:Teams): Observable<any>{
   return this.http.put(this.myAppUrl+ this.myApiUrl + id_e,equipo).pipe(
     catchError((error) => {
       if (error.status === 404 && error.error.message === 'Ya existe otro equipo con el mismo nombre, país y ciudad') {
@@ -46,8 +46,8 @@ getListEquipos(keyword: string): Observable<any> {
   );
  }
 
- getEquipoById(id: number): Observable<Equipo> {
-  return this.http.get<Equipo>(`${this.myAppUrl}${this.myApiUrl}${id}`);
+ getEquipoById(id: number): Observable<Teams> {
+  return this.http.get<Teams>(`${this.myAppUrl}${this.myApiUrl}${id}`);
 }
 
 //Jugadores
@@ -56,11 +56,11 @@ getListJugadores(keyword: string):Observable<any>{
   return this.http.get(`${this.myAppUrl}api/Players?keyword=${keyword}`);
 }
 
-saveJugador(jugador: Jugador): Observable<any>{
+saveJugador(jugador: Players): Observable<any>{
  return this.http.post(this.myAppUrl + this.myApiUrljug, jugador );
 }
 
-updateJugador(id_j:number, jugador: Jugador): Observable<any>{
+updateJugador(id_j:number, jugador: Players): Observable<any>{
   return this.http.put(this.myAppUrl + this.myApiUrljug + id_j,jugador);
 }
 
@@ -68,7 +68,7 @@ deleteJugador(id_j: number): Observable<any>{
 return this.http.delete(this.myAppUrl + this.myApiUrljug + id_j);
 }
 
-getJugadorById(id: number): Observable<Jugador>{
-return this.http.get<Jugador>(this.myAppUrl+this.myApiUrljug+id)
+getJugadorById(id: number): Observable<Players>{
+return this.http.get<Players>(this.myAppUrl+this.myApiUrljug+id)
 }
 }

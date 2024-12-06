@@ -4,7 +4,7 @@
      [title]="'Buscar Equipos'"
      [titlePlaceholder]="'equipo'"
     [data]="equipos"
-    [propiedades]="['name']"
+    [properties]="['name']"
     (newData)="search($event)"
     ></app-buscador>
   </div> 
@@ -23,7 +23,7 @@
 
 
 
-<table mat-table [dataSource]="equiposFiltrados || paginatedEquipos" >
+<table mat-table [dataSource]="filterTeams || paginatedTeams" >
   
   <!-- Nombre Column -->
   <ng-container matColumnDef="nombre">
@@ -65,14 +65,14 @@
   <ng-container matColumnDef="editar">
     <th mat-header-cell *matHeaderCellDef> Editar </th>
     <td mat-cell *matCellDef="let element">
-      <a (click)="editarEquipo(element)"><mat-icon>edit_square</mat-icon></a>
+      <a (click)="editTeams(element)"><mat-icon>edit_square</mat-icon></a>
     </td>
   </ng-container>
 
   <ng-container matColumnDef="borrar">
     <th mat-header-cell *matHeaderCellDef> Borrar </th>
     <td mat-cell *matCellDef="let element">
-      <a (click)="eliminarEquipo(element.id, element.name)"><mat-icon>delete</mat-icon></a>
+      <a (click)="deleteTeams(element.id, element.name)"><mat-icon>delete</mat-icon></a>
       
     </td>
   </ng-container>
